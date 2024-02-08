@@ -440,7 +440,7 @@ impl<'ty> ConstraintGroupBuilder<'ty> {
             // When initializing a non-PDA account, the account being
             // initialized must sign to invoke the system program's create
             // account instruction.
-            if self.signer.is_none() && self.seeds.is_none() && self.associated_token_mint.is_none()
+            if (!i.if_needed && self.signer.is_none()) && self.seeds.is_none() && self.associated_token_mint.is_none()
             {
                 self.signer
                     .replace(Context::new(i.span(), ConstraintSigner { error: None }));
